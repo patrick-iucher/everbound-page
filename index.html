@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#090d13" />
+  <title>Everbound — Animation Archive</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap');
+    :root { --bg:#090d13; --panel:#111821; --text:#ede6d6; --muted:#8b99a3; --gold:#d8b478; --border:#29343d; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:radial-gradient(ellipse at 50% -20%,#253241 0%,transparent 58%),var(--bg); color:var(--text); font-family:'DM Sans',sans-serif; min-height:100vh; }
+    body::before {content:"";pointer-events:none;position:fixed;inset:0;opacity:.18;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.17'/%3E%3C/svg%3E")}
+    .shell { max-width:1240px; margin:auto; padding:0 34px; }
+    header { border-bottom:1px solid #26313b; }
+    .nav { min-height:78px; display:flex; align-items:center; justify-content:space-between; gap:20px; }
+    .brand {font-family:Cinzel,Georgia,serif;font-size:22px;letter-spacing:.16em;font-weight:700;color:#f0e3cc;text-decoration:none}
+    .brand i { font-style:normal;color:var(--gold); }
+    .nav-right { display:flex; align-items:center; gap:14px; color:var(--muted);font-size:11px; letter-spacing:.19em;text-transform:uppercase; }
+    .nav-dot {width:6px;height:6px;border-radius:50%;background:#a0be91;box-shadow:0 0 12px #a0be91}
+    .hero { text-align:center; padding:86px 0 56px; }
+    .eyebrow {color:var(--gold);letter-spacing:.32em;text-transform:uppercase;font-size:11px;font-weight:700}
+    h1 { font-family:Cinzel,Georgia,serif; font-weight:500;font-size:clamp(36px,6vw,62px);letter-spacing:.06em;line-height:1.15;margin:18px 0; }
+    .hero p {font-size:15px;line-height:1.8;color:#a4adb3;margin:0 auto;max-width:560px}
+    .rule {display:flex;align-items:center;justify-content:center;gap:15px;margin:29px auto 0;color:var(--gold);font-size:18px}
+    .rule::before,.rule::after {content:"";display:block;width:70px;height:1px;background:linear-gradient(90deg,transparent,#ad8d58)}
+    .rule::after {transform:rotate(180deg)}
+    .section-top {display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:24px}
+    .section-top h2 {font-family:Cinzel,Georgia,serif;font-size:20px;font-weight:600;letter-spacing:.065em;margin:0 0 5px}
+    .section-top p {color:var(--muted);font-size:12px;margin:0}
+    .counter {font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:var(--gold)}
+    .grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+    .card {background:linear-gradient(140deg,#17212b,#10171e 65%);border:1px solid #303b43;border-radius:7px;overflow:hidden;box-shadow:0 12px 48px #0005;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
+    .card:hover {transform:translateY(-5px);border-color:#967c56;box-shadow:0 22px 54px #0008}
+    .card-top {display:flex;align-items:center;justify-content:space-between;padding:17px 19px;border-bottom:1px solid #29343d}
+    .index {font-size:11px;color:#7f8d94;letter-spacing:.13em}
+    .type {font-size:10px;color:var(--gold);letter-spacing:.16em;text-transform:uppercase}
+    .stage {position:relative;display:grid;place-items:center;min-height:326px;padding:36px 16px;isolation:isolate;overflow:hidden;background:radial-gradient(ellipse at center,#26323a 0%,#1a252e 42%,#101820 83%)}
+    .stage::before {content:"";position:absolute;inset:0;z-index:-1;background-image:linear-gradient(#c3d5d908 1px,transparent 1px),linear-gradient(90deg,#c3d5d908 1px,transparent 1px);background-size:22px 22px;mask-image:radial-gradient(circle,#000 18%,transparent 78%)}
+    .stage::after {content:"";position:absolute;inset:20px;border:1px solid #ffffff09;pointer-events:none}
+    .sprite {width:192px;height:192px;object-fit:contain;image-rendering:pixelated;filter:drop-shadow(0 18px 16px #0006);max-width:100%;}
+    .missing {position:absolute;inset:0;display:none;align-items:center;justify-content:center;flex-direction:column;gap:12px;padding:20px;text-align:center;color:#aab4b7;background:radial-gradient(ellipse at center,#24313b,#101820 78%)}
+    .missing svg {width:32px;height:32px;opacity:.65;stroke:var(--gold)}
+    .missing strong {font-size:12px;letter-spacing:.06em;color:#dcd3c2}
+    .missing small {max-width:245px;overflow-wrap:anywhere;color:#8e9ba2;font-size:11px;line-height:1.5}
+    .card-bottom {padding:21px 20px 19px}
+    .card-bottom h3 {font-family:Cinzel,Georgia,serif;font-weight:600;font-size:19px;margin:0 0 10px;letter-spacing:.02em}
+    .card-bottom p {margin:0;color:#94a1a7;font-size:12px;line-height:1.7;min-height:40px}
+    .meta {display:flex;align-items:center;justify-content:space-between;border-top:1px solid #2b343c;margin-top:18px;padding-top:16px;color:#89979d;font-size:11px;letter-spacing:.04em}
+    .meta span:last-child {color:#bba37b}
+    .notice {display:flex;align-items:flex-start;gap:14px;margin:34px 0 85px;padding:19px 22px;background:#121a20;border:1px solid #29343b;border-left:2px solid var(--gold);border-radius:3px}
+    .notice .symbol {font-size:19px;color:var(--gold);line-height:1}
+    .notice strong {display:block;font-size:12px;margin-bottom:6px;color:#ddd6c8}
+    .notice p {color:#8d9ba1;font-size:12px;line-height:1.7;margin:0}
+    code {color:#d5b98f;background:#202932;padding:2px 5px;border-radius:3px;overflow-wrap:anywhere}
+    footer {border-top:1px solid #26313b;padding:26px 0 35px;font-size:11px;letter-spacing:.1em;color:#77858c}
+    .footer-inner {display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    @media(max-width:850px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{padding-top:65px}}
+    @media(max-width:580px){.shell{padding:0 19px}.grid{grid-template-columns:1fr}.hero{padding:58px 0 48px}.nav{min-height:68px}.nav-right{font-size:9px}.section-top h2{font-size:17px}.stage{min-height:285px}.notice{margin-bottom:55px}}
+    @media(prefers-reduced-motion:reduce){.card{transition:none}.card:hover{transform:none}}
+  </style>
+</head>
+<body>
+  <header><div class="shell nav"><a class="brand" href="#">EVER<i>BOUND</i></a><div class="nav-right"><span class="nav-dot"></span> THE ANIMATION ARCHIVE</div></div></header>
+  <main class="shell">
+    <section class="hero"><div class="eyebrow">Character motion · Vol. 01</div><h1>Forged in Motion</h1><p>Um olhar sobre os movimentos de combate de Everbound. Cada quadro carrega a força, a precisão e a identidade de um mundo em construção.</p><div class="rule">✦</div></section>
+    <section aria-label="Vitrine de animações">
+      <div class="section-top"><div><h2>Combat Animations</h2><p>Exploração visual de ataques direcionais</p></div><div class="counter">03 / ANIMATIONS</div></div>
+      <div class="grid">
+        <article class="card"><div class="card-top"><span class="index">ANIMATION / 001</span><span class="type">SIDE · ATTACK</span></div><div class="stage"><img class="sprite" src="animation-side-attack.gif" alt="Animação de ataque lateral do jogo Everbound" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="missing"><svg fill="none" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m3 16 5-5 4 4 3-3 6 6"/></svg><strong>Adicione o GIF para visualizar</strong><small>animation-side-attack.gif</small></div></div><div class="card-bottom"><h3>Side Attack</h3><p>Sequência de ataque lateral com movimento e impacto direcionados.</p><div class="meta"><span>SPRITE · 192 × 192 PX</span><span>01 / 03</span></div></div></article>
+        <article class="card"><div class="card-top"><span class="index">ANIMATION / 002</span><span class="type">DOWN · ATTACK</span></div><div class="stage"><img class="sprite" src="animation-down-attack.gif" alt="Animação de ataque para baixo do jogo Everbound" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="missing"><svg fill="none" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m3 16 5-5 4 4 3-3 6 6"/></svg><strong>Adicione o GIF para visualizar</strong><small>animation-down-attack.gif</small></div></div><div class="card-bottom"><h3>Down Attack</h3><p>Sequência de ataque frontal, voltada para a parte inferior da cena.</p><div class="meta"><span>SPRITE · 192 × 192 PX</span><span>02 / 03</span></div></div></article>
+        <article class="card"><div class="card-top"><span class="index">ANIMATION / 003</span><span class="type">UP · ATTACK</span></div><div class="stage"><img class="sprite" src="animation-up-attack.gif" alt="Animação de ataque para cima do jogo Everbound" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="missing"><svg fill="none" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m3 16 5-5 4 4 3-3 6 6"/></svg><strong>Adicione o GIF para visualizar</strong><small>animation-up-attack.gif</small></div></div><div class="card-bottom"><h3>Up Attack</h3><p>Sequência de ataque frontal, voltada para a parte superior da cena.</p><div class="meta"><span>SPRITE · 192 × 192 PX</span><span>03 / 03</span></div></div></article>
+      </div>
+    </section>
+    <aside class="notice"><div class="symbol">✧</div><div><strong>Como adicionar as animações</strong><p>Salve este HTML e coloque os GIFs na <b>mesma pasta</b>, mantendo os nomes <code>animation-side-attack.gif</code>, <code>animation-down-attack.gif</code> e <code>animation-up-attack.gif</code>. Abra o arquivo no navegador. Os GIFs serão exibidos automaticamente, em loop, sem precisar alterar o código.</p></div></aside>
+  </main>
+  <footer><div class="shell footer-inner"><span>© EVERBOUND · ANIMATION SHOWCASE</span><span>AN ADVENTURE IN THE MAKING</span></div></footer>
+</body>
+</html>
